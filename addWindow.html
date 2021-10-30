@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <form>
+        <div class="form-control">
+          <label for="name"> Enter the Item</label>
+          <input type="text" autofocus id="name" />
+        </div>
+        <buttton class="btn" type="submit">Send</buttton>
+      </form>
+    </div>
+    <script>
+      const electron = require('electron');
+      // import electron from 'electron';
+      const { ipcRenderer } = electron;
+      document.querySelector('form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const item = document.querySelector('#name').value;
+        ipcRenderer.send('item:add', item);
+      });
+    </script>
+  </body>
+</html>
